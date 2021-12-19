@@ -1,7 +1,8 @@
-package com.example.photo_gallery;
+package com.example.photo_gallery.ui;
 
 import android.os.Bundle;
 
+import com.example.photo_gallery.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
