@@ -1,4 +1,4 @@
-package com.example.photo_gallery.data.contracts;
+package com.example.photo_gallery.models.contracts;
 
 public interface Photo {
 

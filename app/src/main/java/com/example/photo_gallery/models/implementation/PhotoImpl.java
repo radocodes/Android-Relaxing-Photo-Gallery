@@ -1,4 +1,4 @@
-package com.example.photo_gallery.data.implementation;
+package com.example.photo_gallery.models.implementation;
 
 public class PhotoImpl {
     private final String id;
