@@ -1,6 +1,6 @@
 package com.example.photo_gallery.data.models.photo;
 
-public class PhotoImpl {
+public class PhotoImpl implements Photo {
     private final String id;
     private final String author;
     private final int width;
