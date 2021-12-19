@@ -18,19 +18,20 @@ import com.example.photo_gallery.R;
 import com.example.photo_gallery.data.models.photo.Photo;
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.databinding.FragmentDashboardBinding;
+import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private PhotoViewModel photoViewModel;
     private FragmentDashboardBinding binding;
     PhotoListAdapter adapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        photoViewModel =
+                new ViewModelProvider(this).get(PhotoViewModel.class);
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -47,7 +48,7 @@ public class DashboardFragment extends Fragment {
     }
 
     private void subscribeObservers() {
-        dashboardViewModel.getAllPhotos().observe(getViewLifecycleOwner(), new PhotoListObserver());
+        photoViewModel.getAllPhotos().observe(getViewLifecycleOwner(), new PhotoListObserver());
     }
 
     private class PhotoListObserver implements Observer<List<PhotoImpl>> {

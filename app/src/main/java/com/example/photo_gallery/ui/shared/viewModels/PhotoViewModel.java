@@ -1,4 +1,4 @@
-package com.example.photo_gallery.ui.dashboard;
+package com.example.photo_gallery.ui.shared.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -9,11 +9,11 @@ import com.example.photo_gallery.data.repositories.photo.PhotoRepositoryImpl;
 
 import java.util.List;
 
-public class DashboardViewModel extends ViewModel {
+public class PhotoViewModel extends ViewModel {
 
     private PhotoRepository photoRepository;
 
-    public DashboardViewModel() {
+    public PhotoViewModel() {
         this.photoRepository = new PhotoRepositoryImpl();
     }
 
