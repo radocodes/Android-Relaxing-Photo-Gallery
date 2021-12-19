@@ -4,22 +4,29 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.photo_gallery.R;
+import com.example.photo_gallery.data.models.photo.Photo;
+import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.databinding.FragmentDashboardBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DashboardFragment extends Fragment {
 
     private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
-
+    PhotoListAdapter adapter;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
@@ -28,13 +35,8 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
+        subscribeObservers();
+
         return root;
     }
 
@@ -42,5 +44,32 @@ public class DashboardFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void subscribeObservers() {
+        dashboardViewModel.getAllPhotos().observe(getViewLifecycleOwner(), new PhotoListObserver());
+    }
+
+    private class PhotoListObserver implements Observer<List<PhotoImpl>> {
+        @Override
+        public void onChanged(List<PhotoImpl> photos) {
+            ArrayList<Photo> photoArrayList = new ArrayList<>();
+            photoArrayList.addAll(photos);
+
+            // set up the RecyclerView
+            RecyclerView recyclerView = binding.getRoot().findViewById(R.id.photos_list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
+            adapter = new PhotoListAdapter(getContext(), photoArrayList);
+            adapter.setClickListener(new PhotoListClickListener());
+            recyclerView.setAdapter(adapter);
+        }
+    }
+
+    private class PhotoListClickListener implements PhotoListAdapter.ItemClickListener {
+        @Override
+        public void onItemClick(View view, int position) {
+            Toast.makeText(getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        }
     }
 }
