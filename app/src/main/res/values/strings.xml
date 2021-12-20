@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="photo_details_author_name_ticket">Author:</string>
+    <string name="photo_details_original_width_ticket">Original width:</string>
+    <string name="photo_details_original_height_ticket">Original height:</string>
+    <string name="photo_details_photo_image_url_ticket">Origin URL:</string>
 </resources>
