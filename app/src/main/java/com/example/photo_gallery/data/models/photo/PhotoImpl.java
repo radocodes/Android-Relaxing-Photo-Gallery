@@ -4,16 +4,16 @@ public class PhotoImpl implements Photo {
     private final String id;
     private final String author;
     private final int width;
-    private final int weight;
+    private final int height;
     private final String url;
     private final String download_url;
 
-    public PhotoImpl (String id, String author, int width, int weight, String url, String download_url)
+    public PhotoImpl (String id, String author, int width, int height, String url, String download_url)
     {
         this.id = id;
         this.author = author;
         this.width = width;
-        this.weight = weight;
+        this.height = height;
         this.url = url;
         this.download_url = download_url;
     }
@@ -30,8 +30,8 @@ public class PhotoImpl implements Photo {
         return width;
     }
 
-    public int getWeight() {
-        return weight;
+    public int getHeight() {
+        return height;
     }
 
     public String getUrl() {

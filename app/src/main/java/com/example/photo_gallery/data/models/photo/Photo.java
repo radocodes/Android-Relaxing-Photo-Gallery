@@ -8,7 +8,7 @@ public interface Photo {
 
     public int getWidth();
 
-    public int getWeight();
+    public int getHeight();
 
     public String getUrl();
 
