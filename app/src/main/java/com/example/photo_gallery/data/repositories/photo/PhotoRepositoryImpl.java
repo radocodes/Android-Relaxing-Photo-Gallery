@@ -25,6 +25,7 @@ public class PhotoRepositoryImpl implements PhotoRepository {
     public PhotoRepositoryImpl() {
         this.retrofit = createRetrofitInstance();
         allPhotosResult = new MutableLiveData<>();
+        singlePhotoResult = new MutableLiveData<>();
     }
 
     @Override
