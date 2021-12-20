@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,7 +18,11 @@ import com.example.photo_gallery.R;
 import com.example.photo_gallery.data.models.photo.Photo;
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.databinding.FragmentDashboardBinding;
+import com.example.photo_gallery.ui.MainActivity;
+import com.example.photo_gallery.ui.photoDetails.PhotoDetailsFragment;
 import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +31,8 @@ public class DashboardFragment extends Fragment {
 
     private PhotoViewModel photoViewModel;
     private FragmentDashboardBinding binding;
-    PhotoListAdapter adapter;
+    private PhotoListAdapter adapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         photoViewModel =
@@ -36,9 +41,14 @@ public class DashboardFragment extends Fragment {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        subscribeObservers();
-
         return root;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        subscribeObservers();
     }
 
     @Override
@@ -70,7 +80,16 @@ public class DashboardFragment extends Fragment {
     private class PhotoListClickListener implements PhotoListAdapter.ItemClickListener {
         @Override
         public void onItemClick(View view, int position) {
-            Toast.makeText(getContext(), "You clicked " + adapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+            Photo chosenPhoto = adapter.getItem(position);
+            PhotoDetailsFragment fragment = new PhotoDetailsFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString(fragment.CHOSEN_PHOTO_ID_BUNDLE_KEY, chosenPhoto.getId());
+            fragment.setArguments(bundle);
+
+            ((MainActivity) getActivity()).replaceFragment(R.id.container,
+                    fragment,
+                    PhotoDetailsFragment.class.getClass().getName(),
+                    DashboardFragment.class.getClass().getName());
         }
     }
 }
