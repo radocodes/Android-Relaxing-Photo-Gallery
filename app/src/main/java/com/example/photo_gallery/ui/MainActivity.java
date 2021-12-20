@@ -5,13 +5,18 @@ import android.os.Bundle;
 import com.example.photo_gallery.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.IdRes;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.photo_gallery.databinding.ActivityMainBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,4 +40,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    public  void replaceFragment(@IdRes int containerViewId, @NotNull Fragment newFragment, @Nullable String newFragmentTag, @Nullable String oldFragmentTag) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(containerViewId, newFragment, newFragmentTag)
+                .addToBackStack(oldFragmentTag)
+                .commit();
+    }
 }
