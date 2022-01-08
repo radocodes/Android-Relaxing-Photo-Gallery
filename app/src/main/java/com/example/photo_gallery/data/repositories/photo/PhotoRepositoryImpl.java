@@ -29,11 +29,10 @@ public class PhotoRepositoryImpl implements PhotoRepository {
     }
 
     @Override
-    public LiveData<List<PhotoImpl>> getAll() {
+    public void fetchAll() {
         getPhotoWebApiClientImpl().getAll().enqueue(new Callback<List<PhotoImpl>>() {
             @Override
             public void onResponse(Call<List<PhotoImpl>> call, Response<List<PhotoImpl>> response) {
-
                 if (response.isSuccessful()) {
                     allPhotosResult.postValue(response.body());
                 }else {
@@ -46,7 +45,10 @@ public class PhotoRepositoryImpl implements PhotoRepository {
                 t.printStackTrace();
             }
         });
+    }
 
+    @Override
+    public MutableLiveData<List<PhotoImpl>> getAll() {
         return allPhotosResult;
     }
 

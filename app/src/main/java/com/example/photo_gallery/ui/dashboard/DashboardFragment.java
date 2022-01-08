@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +38,6 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
@@ -54,16 +54,24 @@ public class DashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         photoViewModel = new ViewModelProvider(this).get(PhotoViewModel.class);
-
+        
         subscribeObservers();
-
-        photoViewModel.getAllPhotos();
+        photoViewModel.fetchAllPhotos();
+        addButtonsFunctionality();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void addButtonsFunctionality() {
+        Button ascendingFilter = (Button) binding.getRoot().findViewById(R.id.button_ascending_order);
+        ascendingFilter.setOnClickListener(new AscendingFilterButtonClickListener());
+
+        Button descendingFilter = (Button) binding.getRoot().findViewById(R.id.button_descending_order);
+        descendingFilter.setOnClickListener(new DescendingFilterButtonClickListener());
     }
 
     private void subscribeObservers() {
@@ -91,6 +99,30 @@ public class DashboardFragment extends Fragment {
             bundle.putString(getString(R.string.chosen_photo_id_bundle_key), chosenPhoto.getId());
 
             Navigation.findNavController(view).navigate(R.id.PhotoDetailsAction, bundle);
+        }
+    }
+
+    private class AscendingFilterButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+
+            if (allPhotos != null) {
+                photoViewModel.SortPhotosAscending(allPhotos);
+                photoViewModel.getAllPhotos().postValue(allPhotos);
+            }
+        }
+    }
+
+    private class DescendingFilterButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+
+            if (allPhotos != null) {
+                photoViewModel.SortPhotosDescending(allPhotos);
+                photoViewModel.getAllPhotos().postValue(allPhotos);
+            }
         }
     }
 }

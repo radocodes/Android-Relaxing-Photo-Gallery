@@ -35,8 +35,7 @@ public class PhotoDetailsFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        photoViewModel =
-                new ViewModelProvider(this).get(PhotoViewModel.class);
+        photoViewModel = new ViewModelProvider(this).get(PhotoViewModel.class);
 
         binding = FragmentPhotoDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
