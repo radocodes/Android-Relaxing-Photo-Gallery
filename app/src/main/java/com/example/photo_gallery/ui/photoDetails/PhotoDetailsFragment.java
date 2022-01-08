@@ -23,8 +23,6 @@ import org.jetbrains.annotations.NotNull;
 
 public class PhotoDetailsFragment extends Fragment {
 
-    public final String CHOSEN_PHOTO_ID_BUNDLE_KEY = "photoId";
-
     private String currentPhotoId;
     private PhotoViewModel photoViewModel;
     private FragmentPhotoDetailsBinding binding;
@@ -58,7 +56,7 @@ public class PhotoDetailsFragment extends Fragment {
 
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            currentPhotoId = bundle.getString(CHOSEN_PHOTO_ID_BUNDLE_KEY);
+            currentPhotoId = bundle.getString(getString(R.string.chosen_photo_id_bundle_key));
         }
 
         subscribeObservers();

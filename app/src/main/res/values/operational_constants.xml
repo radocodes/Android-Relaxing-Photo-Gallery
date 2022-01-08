@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="chosen_photo_id_bundle_key">photoId</string>
+</resources>
