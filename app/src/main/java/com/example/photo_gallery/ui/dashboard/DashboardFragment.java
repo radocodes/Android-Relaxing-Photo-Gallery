@@ -1,13 +1,16 @@
 package com.example.photo_gallery.ui.dashboard;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -54,7 +57,7 @@ public class DashboardFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         photoViewModel = new ViewModelProvider(this).get(PhotoViewModel.class);
-        
+
         subscribeObservers();
         photoViewModel.fetchAllPhotos();
         addButtonsFunctionality();
@@ -72,6 +75,9 @@ public class DashboardFragment extends Fragment {
 
         Button descendingFilter = (Button) binding.getRoot().findViewById(R.id.button_descending_order);
         descendingFilter.setOnClickListener(new DescendingFilterButtonClickListener());
+
+        Button PhotoSearch = (Button) binding.getRoot().findViewById(R.id.button_search);
+        PhotoSearch.setOnClickListener(new SearchButtonClickListener());
     }
 
     private void subscribeObservers() {
@@ -108,7 +114,7 @@ public class DashboardFragment extends Fragment {
             List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
 
             if (allPhotos != null) {
-                photoViewModel.SortPhotosAscending(allPhotos);
+                photoViewModel.sortPhotosAscending(allPhotos);
                 photoViewModel.getAllPhotos().postValue(allPhotos);
             }
         }
@@ -120,9 +126,39 @@ public class DashboardFragment extends Fragment {
             List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
 
             if (allPhotos != null) {
-                photoViewModel.SortPhotosDescending(allPhotos);
+                photoViewModel.sortPhotosDescending(allPhotos);
                 photoViewModel.getAllPhotos().postValue(allPhotos);
             }
+        }
+    }
+
+    private class SearchButtonClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("Search photo by author name:");
+
+            // Set up the input
+            final EditText input = new EditText(getContext());
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String searchText = input.getText().toString();
+                    List<PhotoImpl> SearchResult = photoViewModel.filterPhotosByAuthorName(searchText);
+                    photoViewModel.getAllPhotos().postValue(SearchResult);
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
         }
     }
 }

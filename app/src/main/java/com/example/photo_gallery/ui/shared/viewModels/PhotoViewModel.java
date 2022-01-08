@@ -10,6 +10,7 @@ import com.example.photo_gallery.data.repositories.photo.PhotoRepositoryImpl;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PhotoViewModel extends ViewModel {
 
@@ -31,14 +32,29 @@ public class PhotoViewModel extends ViewModel {
         return  this.photoRepository.getPhotoById(id);
     }
 
-    public List<PhotoImpl> SortPhotosAscending (List<PhotoImpl> photoList) {
+    public List<PhotoImpl> sortPhotosAscending (List<PhotoImpl> photoList) {
         Collections.sort(photoList, (photoA, photoB) -> photoA.getAuthor().compareTo(photoB.getAuthor()));
         return photoList;
     }
 
-    public List<PhotoImpl> SortPhotosDescending (List<PhotoImpl> photoList) {
-        photoList = this.SortPhotosAscending(photoList);
+    public List<PhotoImpl> sortPhotosDescending (List<PhotoImpl> photoList) {
+        photoList = this.sortPhotosAscending(photoList);
         Collections.reverse(photoList);
         return photoList;
+    }
+
+    public List<PhotoImpl> filterPhotosByAuthorName (String searchInput) {
+        List<PhotoImpl> allPhotos = this.getAllPhotos().getValue();
+        List<PhotoImpl> searchResult = null;
+
+        if (allPhotos != null) {
+            searchResult = allPhotos.stream().filter(photo -> photo.getAuthor().toLowerCase()
+                    .contains(searchInput.toLowerCase())).collect(Collectors.toList());
+
+            if (searchResult.size() == 0){
+                return allPhotos;
+            }
+        }
+        return searchResult;
     }
 }
