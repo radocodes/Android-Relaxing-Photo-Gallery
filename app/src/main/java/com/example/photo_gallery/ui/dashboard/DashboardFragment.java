@@ -70,14 +70,14 @@ public class DashboardFragment extends Fragment {
     }
 
     private void addButtonsFunctionality() {
-        Button ascendingFilter = (Button) binding.getRoot().findViewById(R.id.button_ascending_order);
-        ascendingFilter.setOnClickListener(new AscendingFilterButtonClickListener());
+        Button ascendingFilterButton = (Button) binding.getRoot().findViewById(R.id.button_ascending_order);
+        ascendingFilterButton.setOnClickListener(new AscendingFilterButtonClickListener());
 
-        Button descendingFilter = (Button) binding.getRoot().findViewById(R.id.button_descending_order);
-        descendingFilter.setOnClickListener(new DescendingFilterButtonClickListener());
+        Button descendingFilterButton = (Button) binding.getRoot().findViewById(R.id.button_descending_order);
+        descendingFilterButton.setOnClickListener(new DescendingFilterButtonClickListener());
 
-        Button PhotoSearch = (Button) binding.getRoot().findViewById(R.id.button_search);
-        PhotoSearch.setOnClickListener(new SearchButtonClickListener());
+        Button PhotoSearchButton = (Button) binding.getRoot().findViewById(R.id.button_search);
+        PhotoSearchButton.setOnClickListener(new SearchButtonClickListener());
     }
 
     private void subscribeObservers() {
