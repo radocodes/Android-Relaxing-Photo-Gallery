@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,8 +19,6 @@ import com.example.photo_gallery.R;
 import com.example.photo_gallery.data.models.photo.Photo;
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.databinding.FragmentDashboardBinding;
-import com.example.photo_gallery.ui.MainActivity;
-import com.example.photo_gallery.ui.photoDetails.PhotoDetailsFragment;
 import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
 
 import org.jetbrains.annotations.NotNull;
@@ -27,19 +26,25 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DashboardFragment extends Fragment {
 
     private PhotoViewModel photoViewModel;
     private FragmentDashboardBinding binding;
     private PhotoListAdapter adapter;
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        photoViewModel =
-                new ViewModelProvider(this).get(PhotoViewModel.class);
+
 
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+        // set up the RecyclerView
+        recyclerView = binding.getRoot().findViewById(R.id.photos_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
 
         return root;
     }
@@ -48,7 +53,11 @@ public class DashboardFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        photoViewModel = new ViewModelProvider(this).get(PhotoViewModel.class);
+
         subscribeObservers();
+
+        photoViewModel.getAllPhotos();
     }
 
     @Override
@@ -67,10 +76,6 @@ public class DashboardFragment extends Fragment {
             ArrayList<Photo> photoArrayList = new ArrayList<>();
             photoArrayList.addAll(photos);
 
-            // set up the RecyclerView
-            RecyclerView recyclerView = binding.getRoot().findViewById(R.id.photos_list);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-            recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
             adapter = new PhotoListAdapter(getContext(), photoArrayList);
             adapter.setClickListener(new PhotoListClickListener());
             recyclerView.setAdapter(adapter);
@@ -81,15 +86,11 @@ public class DashboardFragment extends Fragment {
         @Override
         public void onItemClick(View view, int position) {
             Photo chosenPhoto = adapter.getItem(position);
-            PhotoDetailsFragment fragment = new PhotoDetailsFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString(fragment.CHOSEN_PHOTO_ID_BUNDLE_KEY, chosenPhoto.getId());
-            fragment.setArguments(bundle);
 
-            ((MainActivity) getActivity()).replaceFragment(R.id.container,
-                    fragment,
-                    PhotoDetailsFragment.class.getClass().getName(),
-                    DashboardFragment.class.getClass().getName());
+            Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.chosen_photo_id_bundle_key), chosenPhoto.getId());
+
+            Navigation.findNavController(view).navigate(R.id.PhotoDetailsAction, bundle);
         }
     }
 }

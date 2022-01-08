@@ -15,11 +15,26 @@
         android:id="@+id/navigation_dashboard"
         android:name="com.example.photo_gallery.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/PhotoDetailsAction"
+            app:destination="@id/navigation_photo_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.photo_gallery.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_photo_details"
+        android:name="com.example.photo_gallery.ui.photoDetails.PhotoDetailsFragment"
+        android:label="@string/title_photo_details"
+        tools:layout="@layout/fragment_photo_details">
+    <argument
+        android:name="@string/chosen_photo_id_bundle_key"
+        app:argType="string"/>
+    </fragment>
+
 </navigation>

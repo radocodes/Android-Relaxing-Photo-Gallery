@@ -39,12 +39,4 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
-
-    public  void replaceFragment(@IdRes int containerViewId, @NotNull Fragment newFragment, @Nullable String newFragmentTag, @Nullable String oldFragmentTag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(containerViewId, newFragment, newFragmentTag)
-                .addToBackStack(oldFragmentTag)
-                .commit();
-    }
 }
