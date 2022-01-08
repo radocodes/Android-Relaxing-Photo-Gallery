@@ -16,24 +16,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button_descending_order"
+            android:id="@+id/button_ascending_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="A-Z"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/button_ascending_order"
+            app:layout_constraintEnd_toStartOf="@id/button_descending_order"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="122dp" />
 
         <Button
-            android:id="@+id/button_ascending_order"
+            android:id="@+id/button_descending_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Z-A"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/button_search"
-            app:layout_constraintStart_toEndOf="@id/button_descending_order"
+            app:layout_constraintStart_toEndOf="@id/button_ascending_order"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="122dp" />
 
@@ -44,7 +44,7 @@
             android:text="Search"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/button_ascending_order"
+            app:layout_constraintStart_toEndOf="@id/button_descending_order"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="258dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
