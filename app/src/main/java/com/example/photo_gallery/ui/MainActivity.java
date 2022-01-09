@@ -39,12 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        this.onBackPressed();
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
         super.onBackPressed();
+        return super.onOptionsItemSelected(item);
     }
 }
