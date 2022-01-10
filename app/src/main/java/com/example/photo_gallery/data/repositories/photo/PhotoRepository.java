@@ -7,7 +7,7 @@ import com.example.photo_gallery.data.models.photo.PhotoImpl;
 
 import java.util.List;
 
-public interface PhotoRepository {
+public interface PhotoRepository{
 
     public void fetchAll ();
 

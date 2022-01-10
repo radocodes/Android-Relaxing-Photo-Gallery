@@ -6,18 +6,23 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.data.repositories.photo.PhotoRepository;
-import com.example.photo_gallery.data.repositories.photo.PhotoRepositoryImpl;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class PhotoViewModel extends ViewModel {
 
     private PhotoRepository photoRepository;
 
-    public PhotoViewModel() {
-        this.photoRepository = new PhotoRepositoryImpl();
+    @Inject
+    public PhotoViewModel(PhotoRepository photoRepository) {
+        this.photoRepository = photoRepository;
     }
 
     public void fetchAllPhotos() {
@@ -55,6 +60,7 @@ public class PhotoViewModel extends ViewModel {
                 return allPhotos;
             }
         }
+
         return searchResult;
     }
 }

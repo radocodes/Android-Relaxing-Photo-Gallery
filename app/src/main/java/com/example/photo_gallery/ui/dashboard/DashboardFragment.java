@@ -30,7 +30,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class DashboardFragment extends Fragment {
 
     private PhotoViewModel photoViewModel;

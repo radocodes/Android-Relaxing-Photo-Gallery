@@ -21,6 +21,9 @@ import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
 
 import org.jetbrains.annotations.NotNull;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class PhotoDetailsFragment extends Fragment {
 
     private String currentPhotoId;
