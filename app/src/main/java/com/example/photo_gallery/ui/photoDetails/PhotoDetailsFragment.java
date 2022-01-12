@@ -62,6 +62,8 @@ public class PhotoDetailsFragment extends Fragment {
         }
 
         subscribeObservers();
+
+        this.photoViewModel.fetchPhotoDetailsDtoByPhotoId(currentPhotoId);
     }
 
     @Override
@@ -71,13 +73,12 @@ public class PhotoDetailsFragment extends Fragment {
     }
 
     private void subscribeObservers() {
-        photoViewModel.getPhotoById(currentPhotoId).observe(getViewLifecycleOwner(), new PhotoDetailsObserver());
+        photoViewModel.getPhotoDetailsDto().observe(getViewLifecycleOwner(), new PhotoDetailsObserver());
     }
 
     private class PhotoDetailsObserver implements Observer<PhotoImpl> {
         @Override
         public void onChanged(PhotoImpl photo) {
-            String singleWhiteSpace = " ";
 
             authorName.setText(getString(R.string.photo_details_author_name_ticket) + singleWhiteSpace + photo.getAuthor());
             originalWidth.setText(getString(R.string.photo_details_original_width_ticket) + singleWhiteSpace + String.valueOf(photo.getWidth()));

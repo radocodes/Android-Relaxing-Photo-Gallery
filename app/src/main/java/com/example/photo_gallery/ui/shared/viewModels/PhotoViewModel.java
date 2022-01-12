@@ -20,35 +20,46 @@ public class PhotoViewModel extends ViewModel {
 
     private PhotoRepository photoRepository;
 
+    private MutableLiveData<List<PhotoImpl>> allPhotos;
+    private MutableLiveData<PhotoImpl> photoDetailsDto;
+
     @Inject
     public PhotoViewModel(PhotoRepository photoRepository) {
         this.photoRepository = photoRepository;
+        this.allPhotos = new MutableLiveData<>();
+        this.photoDetailsDto = new MutableLiveData<>();
     }
 
     public void fetchAllPhotos() {
-        this.photoRepository.fetchAll();
+        this.photoRepository.getAllPhotos().subscribe(photos -> { this.allPhotos.postValue(photos); },
+                throwable -> {throwable.printStackTrace();});
     }
 
     public MutableLiveData<List<PhotoImpl>> getAllPhotos () {
-        return this.photoRepository.getAll();
+        return this.allPhotos;
     }
 
-    public  LiveData<PhotoImpl> getPhotoById (String id) {
-        return  this.photoRepository.getPhotoById(id);
+    public void fetchPhotoDetailsDtoByPhotoId(String id) {
+        photoRepository.getPhotoById(id).subscribe(photo -> {this.photoDetailsDto.postValue(photo);},
+                throwable -> {throwable.printStackTrace();});
     }
 
-    public List<PhotoImpl> sortPhotosAscending (List<PhotoImpl> photoList) {
+    public LiveData<PhotoImpl> getPhotoDetailsDto() {
+        return this.photoDetailsDto;
+    }
+
+    public List<PhotoImpl> sortPhotosAscending(List<PhotoImpl> photoList) {
         Collections.sort(photoList, (photoA, photoB) -> photoA.getAuthor().compareTo(photoB.getAuthor()));
         return photoList;
     }
 
-    public List<PhotoImpl> sortPhotosDescending (List<PhotoImpl> photoList) {
+    public List<PhotoImpl> sortPhotosDescending(List<PhotoImpl> photoList) {
         photoList = this.sortPhotosAscending(photoList);
         Collections.reverse(photoList);
         return photoList;
     }
 
-    public List<PhotoImpl> filterPhotosByAuthorName (String searchInput) {
+    public List<PhotoImpl> filterPhotosByAuthorName(String searchInput) {
         List<PhotoImpl> allPhotos = this.getAllPhotos().getValue();
         List<PhotoImpl> searchResult = null;
 

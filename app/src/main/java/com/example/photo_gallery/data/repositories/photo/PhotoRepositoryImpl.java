@@ -1,6 +1,5 @@
 package com.example.photo_gallery.data.repositories.photo;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
@@ -10,9 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.rxjava3.core.Single;
 
 public class PhotoRepositoryImpl implements PhotoRepository {
 
@@ -29,48 +26,12 @@ public class PhotoRepositoryImpl implements PhotoRepository {
     }
 
     @Override
-    public void fetchAll() {
-        photoWebApiClient.getAll().enqueue(new Callback<List<PhotoImpl>>() {
-            @Override
-            public void onResponse(Call<List<PhotoImpl>> call, Response<List<PhotoImpl>> response) {
-                if (response.isSuccessful()) {
-                    allPhotosResult.postValue(response.body());
-                }else {
-                    allPhotosResult.postValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PhotoImpl>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+    public Single<List<PhotoImpl>> getAllPhotos() {
+        return photoWebApiClient.getAll();
     }
 
     @Override
-    public MutableLiveData<List<PhotoImpl>> getAll() {
-        return allPhotosResult;
-    }
-
-    @Override
-    public LiveData<PhotoImpl> getPhotoById(String id) {
-        photoWebApiClient.getPhotoById(id).enqueue(new Callback<PhotoImpl>() {
-            @Override
-            public void onResponse(Call<PhotoImpl> call, Response<PhotoImpl> response) {
-
-                if (response.isSuccessful()) {
-                    singlePhotoResult.postValue(response.body());
-                }else {
-                    singlePhotoResult.postValue(null);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PhotoImpl> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-
-        return singlePhotoResult;
+    public Single<PhotoImpl> getPhotoById(String id) {
+        return photoWebApiClient.getPhotoById(id);
     }
 }
