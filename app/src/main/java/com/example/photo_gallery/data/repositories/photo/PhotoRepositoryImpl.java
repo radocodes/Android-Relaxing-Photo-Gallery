@@ -1,7 +1,5 @@
 package com.example.photo_gallery.data.repositories.photo;
 
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.photo_gallery.data.models.photo.PhotoImpl;
 import com.example.photo_gallery.data.network.PhotoWebApiClient;
 
@@ -15,14 +13,9 @@ public class PhotoRepositoryImpl implements PhotoRepository {
 
     private PhotoWebApiClient photoWebApiClient;
 
-    private MutableLiveData<List<PhotoImpl>> allPhotosResult;
-    private MutableLiveData<PhotoImpl> singlePhotoResult;
-
     @Inject
     public PhotoRepositoryImpl(PhotoWebApiClient photoWebApiClient) {
         this.photoWebApiClient = photoWebApiClient;
-        allPhotosResult = new MutableLiveData<>();
-        singlePhotoResult = new MutableLiveData<>();
     }
 
     @Override
