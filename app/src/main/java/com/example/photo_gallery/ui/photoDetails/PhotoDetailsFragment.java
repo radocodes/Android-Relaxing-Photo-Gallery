@@ -27,26 +27,25 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class PhotoDetailsFragment extends Fragment {
 
     private String currentPhotoId;
+    private ViewModelProvider viewModelProvider;
+    private PhotoDetailsViewModel photoDetailsViewModel;
     private PhotoViewModel photoViewModel;
     private FragmentPhotoDetailsBinding binding;
 
-    private TextView authorName;
-    private TextView originalWidth;
-    private TextView originalHeight;
-    private TextView photoImageUrl;
+    private TextView textViewPhotoDetails;
     private ImageView photoImage;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        photoViewModel = new ViewModelProvider(this).get(PhotoViewModel.class);
+
+        this.viewModelProvider = new ViewModelProvider(this);
+        this.photoViewModel = this.viewModelProvider.get(PhotoViewModel.class);
+        this.photoDetailsViewModel = this.viewModelProvider.get(PhotoDetailsViewModel.class);
 
         binding = FragmentPhotoDetailsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        authorName = binding.authorName;
-        originalWidth = binding.originalWidth;
-        originalHeight = binding.originalHeight;
-        photoImageUrl = binding.photoImageUrl;
+        textViewPhotoDetails = binding.textPhotoDetails;
         photoImage = binding.photoImage;
 
         return root;
@@ -79,11 +78,12 @@ public class PhotoDetailsFragment extends Fragment {
     private class PhotoDetailsObserver implements Observer<PhotoImpl> {
         @Override
         public void onChanged(PhotoImpl photo) {
-
-            authorName.setText(getString(R.string.photo_details_author_name_ticket) + singleWhiteSpace + photo.getAuthor());
-            originalWidth.setText(getString(R.string.photo_details_original_width_ticket) + singleWhiteSpace + String.valueOf(photo.getWidth()));
-            originalHeight.setText(getString(R.string.photo_details_original_height_ticket) + singleWhiteSpace + String.valueOf(photo.getHeight()));
-            photoImageUrl.setText(getString(R.string.photo_details_photo_image_url_ticket) + singleWhiteSpace + photo.getDownload_url());
+            textViewPhotoDetails.setText(photoDetailsViewModel.PrepareTextDetailsForPreview(
+                    getString(R.string.photo_details_author_name_ticket),
+                    getString(R.string.photo_details_original_width_ticket),
+                    getString(R.string.photo_details_original_height_ticket),
+                    getString(R.string.photo_details_photo_image_url_ticket),
+                    photo));
 
             Glide.with(photoImage.getContext())
                     .load(photo.getDownload_url())
