@@ -9,6 +9,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.components.SingletonComponent;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -21,6 +22,7 @@ public class PhotoModule {
     public static PhotoWebApiClient getPhotoWebApiClient() {
         return new Retrofit.Builder()
                 .baseUrl(PHOTO_WEB_API_BASE_URL)
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(PhotoWebApiClient.class);
     }
