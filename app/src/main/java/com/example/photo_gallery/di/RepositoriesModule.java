@@ -10,7 +10,7 @@ import dagger.hilt.components.SingletonComponent;
 
 @Module
 @InstallIn(SingletonComponent.class)
-public class PhotoModule {
+public class RepositoriesModule {
 
     @Provides
     public static PhotoRepository getPhotoRepository (PhotoRepositoryImpl photoRepositoryImpl) {
