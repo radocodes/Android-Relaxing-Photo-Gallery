@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.photo_gallery.data.models.photo.PhotoImpl;
+import com.example.photo_gallery.data.models.photo.PhotoDataImpl;
 import com.example.photo_gallery.data.repositories.photo.PhotoRepository;
 
 import java.util.Collections;
@@ -20,8 +20,8 @@ public class PhotoViewModel extends ViewModel {
 
     private PhotoRepository photoRepository;
 
-    private MutableLiveData<List<PhotoImpl>> allPhotos;
-    private MutableLiveData<PhotoImpl> photoDetailsDto;
+    private MutableLiveData<List<PhotoDataImpl>> allPhotos;
+    private MutableLiveData<PhotoDataImpl> photoDetailsDto;
 
     @Inject
     public PhotoViewModel(PhotoRepository photoRepository) {
@@ -35,7 +35,7 @@ public class PhotoViewModel extends ViewModel {
                 throwable -> {throwable.printStackTrace();});
     }
 
-    public MutableLiveData<List<PhotoImpl>> getAllPhotos () {
+    public MutableLiveData<List<PhotoDataImpl>> getAllPhotos () {
         return this.allPhotos;
     }
 
@@ -44,24 +44,24 @@ public class PhotoViewModel extends ViewModel {
                 throwable -> {throwable.printStackTrace();});
     }
 
-    public LiveData<PhotoImpl> getPhotoDetailsDto() {
+    public LiveData<PhotoDataImpl> getPhotoDetailsDto() {
         return this.photoDetailsDto;
     }
 
-    public List<PhotoImpl> sortPhotosAscending(List<PhotoImpl> photoList) {
+    public List<PhotoDataImpl> sortPhotosAscending(List<PhotoDataImpl> photoList) {
         Collections.sort(photoList, (photoA, photoB) -> photoA.getAuthor().compareTo(photoB.getAuthor()));
         return photoList;
     }
 
-    public List<PhotoImpl> sortPhotosDescending(List<PhotoImpl> photoList) {
+    public List<PhotoDataImpl> sortPhotosDescending(List<PhotoDataImpl> photoList) {
         photoList = this.sortPhotosAscending(photoList);
         Collections.reverse(photoList);
         return photoList;
     }
 
-    public List<PhotoImpl> filterPhotosByAuthorName(String searchInput) {
-        List<PhotoImpl> allPhotos = this.getAllPhotos().getValue();
-        List<PhotoImpl> searchResult = null;
+    public List<PhotoDataImpl> filterPhotosByAuthorName(String searchInput) {
+        List<PhotoDataImpl> allPhotos = this.getAllPhotos().getValue();
+        List<PhotoDataImpl> searchResult = null;
 
         if (allPhotos != null) {
             searchResult = allPhotos.stream().filter(photo -> photo.getAuthor().toLowerCase()

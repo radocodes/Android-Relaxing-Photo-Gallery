@@ -1,6 +1,6 @@
 package com.example.photo_gallery.data.network;
 
-import com.example.photo_gallery.data.models.photo.PhotoImpl;
+import com.example.photo_gallery.data.models.photo.PhotoDataImpl;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import retrofit2.http.Path;
 public interface PhotoWebApiClient {
 
     @GET("/v2/list")
-    Single<List<PhotoImpl>> getAll();
+    Single<List<PhotoDataImpl>> getAll();
 
     @GET("/id/{id}/info")
-    Single<PhotoImpl> getPhotoById(@Path("id") String id);
+    Single<PhotoDataImpl> getPhotoById(@Path("id") String id);
 }

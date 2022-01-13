@@ -2,7 +2,7 @@ package com.example.photo_gallery.ui.photoDetails;
 
 import androidx.lifecycle.ViewModel;
 
-import com.example.photo_gallery.data.models.photo.Photo;
+import com.example.photo_gallery.data.models.photo.PhotoData;
 
 public class PhotoDetailsViewModel extends ViewModel {
 
@@ -14,11 +14,11 @@ public class PhotoDetailsViewModel extends ViewModel {
             String originalWidthTicket,
             String originalHeightTicket,
             String photoImageUrlTicket,
-            Photo photo) {
+            PhotoData photoData) {
 
-        return authorNameTicket + SINGLE_WHITE_SPACE + photo.getAuthor() + NEW_ROW
-                + originalWidthTicket + SINGLE_WHITE_SPACE + photo.getWidth() + NEW_ROW
-                + originalHeightTicket + SINGLE_WHITE_SPACE + photo.getHeight() + NEW_ROW
-                + photoImageUrlTicket + SINGLE_WHITE_SPACE + photo.getDownload_url();
+        return authorNameTicket + SINGLE_WHITE_SPACE + photoData.getAuthor() + NEW_ROW
+                + originalWidthTicket + SINGLE_WHITE_SPACE + photoData.getWidth() + NEW_ROW
+                + originalHeightTicket + SINGLE_WHITE_SPACE + photoData.getHeight() + NEW_ROW
+                + photoImageUrlTicket + SINGLE_WHITE_SPACE + photoData.getDownload_url();
     }
 }

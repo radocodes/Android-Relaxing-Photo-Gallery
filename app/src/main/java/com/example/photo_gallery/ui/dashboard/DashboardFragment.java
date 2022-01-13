@@ -20,8 +20,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.photo_gallery.R;
-import com.example.photo_gallery.data.models.photo.Photo;
-import com.example.photo_gallery.data.models.photo.PhotoImpl;
+import com.example.photo_gallery.data.models.photo.PhotoData;
+import com.example.photo_gallery.data.models.photo.PhotoDataImpl;
 import com.example.photo_gallery.databinding.FragmentDashboardBinding;
 import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
 
@@ -86,13 +86,13 @@ public class DashboardFragment extends Fragment {
         photoViewModel.getAllPhotos().observe(getViewLifecycleOwner(), new PhotoListObserver());
     }
 
-    private class PhotoListObserver implements Observer<List<PhotoImpl>> {
+    private class PhotoListObserver implements Observer<List<PhotoDataImpl>> {
         @Override
-        public void onChanged(List<PhotoImpl> photos) {
-            ArrayList<Photo> photoArrayList = new ArrayList<>();
-            photoArrayList.addAll(photos);
+        public void onChanged(List<PhotoDataImpl> photos) {
+            ArrayList<PhotoData> photoDataArrayList = new ArrayList<>();
+            photoDataArrayList.addAll(photos);
 
-            adapter = new PhotoListAdapter(getContext(), photoArrayList);
+            adapter = new PhotoListAdapter(getContext(), photoDataArrayList);
             adapter.setClickListener(new PhotoListClickListener());
             recyclerView.setAdapter(adapter);
         }
@@ -101,7 +101,7 @@ public class DashboardFragment extends Fragment {
     private class PhotoListClickListener implements PhotoListAdapter.ItemClickListener {
         @Override
         public void onItemClick(View view, int position) {
-            Photo chosenPhoto = adapter.getItem(position);
+            PhotoData chosenPhoto = adapter.getItem(position);
 
             Bundle bundle = new Bundle();
             bundle.putString(getString(R.string.chosen_photo_id_bundle_key), chosenPhoto.getId());
@@ -113,7 +113,7 @@ public class DashboardFragment extends Fragment {
     private class AscendingFilterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+            List<PhotoDataImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
 
             if (allPhotos != null) {
                 photoViewModel.sortPhotosAscending(allPhotos);
@@ -125,7 +125,7 @@ public class DashboardFragment extends Fragment {
     private class DescendingFilterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            List<PhotoImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+            List<PhotoDataImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
 
             if (allPhotos != null) {
                 photoViewModel.sortPhotosDescending(allPhotos);
@@ -149,7 +149,7 @@ public class DashboardFragment extends Fragment {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String searchText = input.getText().toString();
-                    List<PhotoImpl> SearchResult = photoViewModel.filterPhotosByAuthorName(searchText);
+                    List<PhotoDataImpl> SearchResult = photoViewModel.filterPhotosByAuthorName(searchText);
                     photoViewModel.getAllPhotos().postValue(SearchResult);
                 }
             });

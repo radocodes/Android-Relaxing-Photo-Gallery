@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.photo_gallery.R;
-import com.example.photo_gallery.data.models.photo.Photo;
+import com.example.photo_gallery.data.models.photo.PhotoData;
 
 import java.util.List;
 
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.ViewHolder> {
 
-    private List<Photo> photoList;
+    private List<PhotoData> photoList;
     private LayoutInflater inflater;
     private ItemClickListener clickListener;
 
-    PhotoListAdapter(Context context, List<Photo> photoList) {
+    PhotoListAdapter(Context context, List<PhotoData> photoList) {
         this.inflater = LayoutInflater.from(context);
         this.photoList = photoList;
     }
@@ -34,12 +34,12 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Photo photoObject = photoList.get(position);
-        String authorName = photoObject.getAuthor();
+        PhotoData photoDataObject = photoList.get(position);
+        String authorName = photoDataObject.getAuthor();
         holder.authorName.setText(authorName);
 
         Glide.with(holder.photoImageView.getContext())
-                .load(photoObject.getDownload_url())
+                .load(photoDataObject.getDownload_url())
                 .into(holder.photoImageView);
     }
 
@@ -66,7 +66,7 @@ public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.View
         }
     }
 
-    Photo getItem(int id) {
+    PhotoData getItem(int id) {
         return photoList.get(id);
     }
 

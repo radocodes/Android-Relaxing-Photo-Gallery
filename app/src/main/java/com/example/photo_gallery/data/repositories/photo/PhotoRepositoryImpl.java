@@ -1,6 +1,6 @@
 package com.example.photo_gallery.data.repositories.photo;
 
-import com.example.photo_gallery.data.models.photo.PhotoImpl;
+import com.example.photo_gallery.data.models.photo.PhotoDataImpl;
 import com.example.photo_gallery.data.network.PhotoWebApiClient;
 
 import java.util.List;
@@ -19,12 +19,12 @@ public class PhotoRepositoryImpl implements PhotoRepository {
     }
 
     @Override
-    public Single<List<PhotoImpl>> getAllPhotos() {
+    public Single<List<PhotoDataImpl>> getAllPhotos() {
         return photoWebApiClient.getAll();
     }
 
     @Override
-    public Single<PhotoImpl> getPhotoById(String id) {
+    public Single<PhotoDataImpl> getPhotoById(String id) {
         return photoWebApiClient.getPhotoById(id);
     }
 }

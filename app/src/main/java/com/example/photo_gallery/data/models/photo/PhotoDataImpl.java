@@ -1,6 +1,6 @@
 package com.example.photo_gallery.data.models.photo;
 
-public class PhotoImpl implements Photo {
+public class PhotoDataImpl implements PhotoData {
     private final String id;
     private final String author;
     private final int width;
@@ -8,7 +8,7 @@ public class PhotoImpl implements Photo {
     private final String url;
     private final String download_url;
 
-    public PhotoImpl (String id, String author, int width, int height, String url, String download_url)
+    public PhotoDataImpl(String id, String author, int width, int height, String url, String download_url)
     {
         this.id = id;
         this.author = author;

@@ -1,6 +1,6 @@
 package com.example.photo_gallery.data.models.photo;
 
-public interface Photo {
+public interface PhotoData {
 
     public String getId();
 

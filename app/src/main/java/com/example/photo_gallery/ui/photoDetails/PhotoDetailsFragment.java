@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.photo_gallery.R;
-import com.example.photo_gallery.data.models.photo.PhotoImpl;
+import com.example.photo_gallery.data.models.photo.PhotoDataImpl;
 import com.example.photo_gallery.databinding.FragmentPhotoDetailsBinding;
 import com.example.photo_gallery.ui.shared.viewModels.PhotoViewModel;
 
@@ -75,9 +75,9 @@ public class PhotoDetailsFragment extends Fragment {
         photoViewModel.getPhotoDetailsDto().observe(getViewLifecycleOwner(), new PhotoDetailsObserver());
     }
 
-    private class PhotoDetailsObserver implements Observer<PhotoImpl> {
+    private class PhotoDetailsObserver implements Observer<PhotoDataImpl> {
         @Override
-        public void onChanged(PhotoImpl photo) {
+        public void onChanged(PhotoDataImpl photo) {
             textViewPhotoDetails.setText(photoDetailsViewModel.PrepareTextDetailsForPreview(
                     getString(R.string.photo_details_author_name_ticket),
                     getString(R.string.photo_details_original_width_ticket),
