@@ -6,16 +6,6 @@
     app:startDestination="@+id/navigation_dashboard">
 
     <fragment
-        android:id="@+id/navigation_favorites"
-        android:name="com.example.photo_gallery.ui.favorites.FavoritesFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_dashboard">
-    <action
-        android:id="@+id/PhotoDetailsAction"
-        app:destination="@id/navigation_photo_details" />
-    </fragment>
-
-    <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.photo_gallery.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
@@ -23,6 +13,16 @@
         <action
             android:id="@+id/PhotoDetailsAction"
             app:destination="@id/navigation_photo_details" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.photo_gallery.ui.favorites.FavoritesFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_dashboard">
+    <action
+        android:id="@+id/PhotoDetailsAction"
+        app:destination="@id/navigation_photo_details" />
     </fragment>
 
     <fragment
