@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_dashboard">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.photo_gallery.ui.home.HomeFragment"
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.photo_gallery.ui.favorites.FavoritesFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_dashboard">
+    <action
+        android:id="@+id/PhotoDetailsAction"
+        app:destination="@id/navigation_photo_details" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
