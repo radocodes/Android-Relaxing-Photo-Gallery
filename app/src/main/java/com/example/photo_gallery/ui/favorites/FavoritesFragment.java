@@ -1,4 +1,4 @@
-package com.example.photo_gallery.ui.home;
+package com.example.photo_gallery.ui.favorites;
 
 import com.example.photo_gallery.ui.base.fragments.DashboardFragmentBase;
 
