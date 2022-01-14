@@ -2,15 +2,17 @@ package com.example.photo_gallery.data.models.photo;
 
 public interface PhotoData {
 
-    public String getId();
+    String getId();
 
-    public String getAuthor();
+    void setId(String id);
 
-    public int getWidth();
+    String getAuthor();
 
-    public int getHeight();
+    int getWidth();
 
-    public String getUrl();
+    int getHeight();
 
-    public String getDownload_url();
+    String getUrl();
+
+    String getDownload_url();
 }

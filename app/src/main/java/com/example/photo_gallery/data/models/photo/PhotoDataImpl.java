@@ -1,7 +1,7 @@
 package com.example.photo_gallery.data.models.photo;
 
 public class PhotoDataImpl implements PhotoData {
-    private final String id;
+    private String id;
     private final String author;
     private final int width;
     private final int height;
@@ -21,6 +21,8 @@ public class PhotoDataImpl implements PhotoData {
     public String getId() {
         return id;
     }
+
+    public void setId(String id) { this.id = id; }
 
     public String getAuthor() {
         return author;
