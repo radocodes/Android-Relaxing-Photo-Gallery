@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.example.photo_gallery.ui.favorites.FavoritesFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_favorites"
         tools:layout="@layout/fragment_dashboard">
     <action
         android:id="@+id/PhotoDetailsAction"
