@@ -34,6 +34,7 @@ public class PhotoDetailsFragment extends Fragment {
 
     private TextView textViewPhotoDetails;
     private ImageView photoImage;
+    private ImageView bookmarkImageButton;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class PhotoDetailsFragment extends Fragment {
 
         textViewPhotoDetails = binding.textPhotoDetails;
         photoImage = binding.photoImage;
+        bookmarkImageButton = binding.bookmarkButton;
 
         return root;
     }
@@ -62,7 +64,9 @@ public class PhotoDetailsFragment extends Fragment {
 
         subscribeObservers();
 
-        this.photoViewModel.fetchPhotoDetailsDtoByPhotoId(currentPhotoId);
+        this.photoDetailsViewModel.fetchPhotoDetailsByPhotoId(currentPhotoId);
+
+        addButtonsFunctionality();
     }
 
     @Override
@@ -72,22 +76,53 @@ public class PhotoDetailsFragment extends Fragment {
     }
 
     private void subscribeObservers() {
-        photoViewModel.getPhotoDetailsDto().observe(getViewLifecycleOwner(), new PhotoDetailsObserver());
+        this.photoDetailsViewModel.getPhotoDetails().observe(getViewLifecycleOwner(), new PhotoDetailsObserver());
+        this.photoDetailsViewModel.isBookmarked().observe(getViewLifecycleOwner(), new BookmarkObserver());
+    }
+
+    private void addButtonsFunctionality() {
+        bookmarkImageButton.setOnClickListener(new BookmarkButtonOnClickListener());
     }
 
     private class PhotoDetailsObserver implements Observer<PhotoDataImpl> {
         @Override
-        public void onChanged(PhotoDataImpl photo) {
+        public void onChanged(PhotoDataImpl photoData) {
+            photoDetailsViewModel.fetchIsBookmarked(photoData.getId());
+
             textViewPhotoDetails.setText(photoDetailsViewModel.PrepareTextDetailsForPreview(
                     getString(R.string.photo_details_author_name_ticket),
                     getString(R.string.photo_details_original_width_ticket),
                     getString(R.string.photo_details_original_height_ticket),
                     getString(R.string.photo_details_photo_image_url_ticket),
-                    photo));
+                    photoData));
 
             Glide.with(photoImage.getContext())
-                    .load(photo.getDownload_url())
+                    .load(photoData.getDownload_url())
                     .into(photoImage);
+        }
+    }
+
+    private class BookmarkObserver implements Observer<Boolean> {
+        @Override
+        public void onChanged(Boolean isBookmarked) {
+            if (isBookmarked) {
+                bookmarkImageButton.setBackgroundColor(getResources().getColor(R.color.purple_200));
+            }
+            else {
+                bookmarkImageButton.setBackgroundColor(getResources().getColor(R.color.white));
+            }
+        }
+    }
+
+    private class BookmarkButtonOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            if (photoDetailsViewModel.isBookmarked().getValue()) {
+                photoDetailsViewModel.removeFromFavorites(photoDetailsViewModel.getPhotoDetails().getValue().getId());
+            }
+            else {
+                photoDetailsViewModel.addToFavorites(photoDetailsViewModel.getPhotoDetails().getValue());
+            }
         }
     }
 }
