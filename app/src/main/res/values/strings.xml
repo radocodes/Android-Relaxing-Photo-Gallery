@@ -2,7 +2,6 @@
     <string name="app_name">photo_gallery</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_favorites">Favorites</string>
-    <string name="title_notifications">Notifications</string>
     <string name="title_photo_details">Photo details</string>
     <string name="photo_details_author_name_ticket">Author:</string>
     <string name="photo_details_original_width_ticket">Original width:</string>
