@@ -35,6 +35,7 @@ public class PhotoDetailsFragment extends Fragment {
     private TextView textViewPhotoDetails;
     private ImageView photoImage;
     private ImageView bookmarkImageButton;
+    private TextView textViewBookmark;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +50,8 @@ public class PhotoDetailsFragment extends Fragment {
         textViewPhotoDetails = binding.textPhotoDetails;
         photoImage = binding.photoImage;
         bookmarkImageButton = binding.bookmarkButton;
+        textViewBookmark = binding.textBookmark;
+
 
         return root;
     }
@@ -106,10 +109,12 @@ public class PhotoDetailsFragment extends Fragment {
         @Override
         public void onChanged(Boolean isBookmarked) {
             if (isBookmarked) {
-                bookmarkImageButton.setBackgroundColor(getResources().getColor(R.color.purple_200));
+                textViewBookmark.setText("Remove from favorites");
+                bookmarkImageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_button_fill));
             }
             else {
-                bookmarkImageButton.setBackgroundColor(getResources().getColor(R.color.white));
+                textViewBookmark.setText("Add to favorites");
+                bookmarkImageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_button_stroke));
             }
         }
     }

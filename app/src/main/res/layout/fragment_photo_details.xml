@@ -33,11 +33,25 @@
     <ImageView
         android:id="@+id/bookmark_button"
         android:layout_width="40dp"
-        android:layout_height="36dp"
-        android:layout_marginBottom="55dp"
+        android:layout_height="25dp"
+        android:layout_marginBottom="0dp"
         android:src="@drawable/ic_bookmark_button_stroke"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/text_bookmark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/photo_image" />
+
+    <TextView
+        android:id="@+id/text_bookmark"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="55dp"
+        android:textAlignment="center"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bookmark_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
