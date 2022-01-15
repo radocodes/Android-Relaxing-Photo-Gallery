@@ -90,7 +90,7 @@ public class DashboardFragmentBase extends Fragment {
     }
 
     private void subscribeObservers() {
-        photoViewModel.getAllPhotos().observe(getViewLifecycleOwner(), new com.example.photo_gallery.ui.base.fragments.DashboardFragmentBase.PhotoListObserver());
+        photoViewModel.getPhotoCollection().observe(getViewLifecycleOwner(), new com.example.photo_gallery.ui.base.fragments.DashboardFragmentBase.PhotoListObserver());
     }
 
     private class PhotoListObserver implements Observer<List<PhotoDataImpl>> {
@@ -120,11 +120,11 @@ public class DashboardFragmentBase extends Fragment {
     private class AscendingFilterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            List<PhotoDataImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+            List<PhotoDataImpl> allPhotos = photoViewModel.getPhotoCollection().getValue();
 
             if (allPhotos != null) {
                 photoViewModel.sortPhotosAscending(allPhotos);
-                photoViewModel.getAllPhotos().postValue(allPhotos);
+                photoViewModel.getPhotoCollection().postValue(allPhotos);
             }
         }
     }
@@ -132,11 +132,11 @@ public class DashboardFragmentBase extends Fragment {
     private class DescendingFilterButtonClickListener implements View.OnClickListener {
         @Override
         public void onClick(View view) {
-            List<PhotoDataImpl> allPhotos = photoViewModel.getAllPhotos().getValue();
+            List<PhotoDataImpl> allPhotos = photoViewModel.getPhotoCollection().getValue();
 
             if (allPhotos != null) {
                 photoViewModel.sortPhotosDescending(allPhotos);
-                photoViewModel.getAllPhotos().postValue(allPhotos);
+                photoViewModel.getPhotoCollection().postValue(allPhotos);
             }
         }
     }
@@ -157,7 +157,7 @@ public class DashboardFragmentBase extends Fragment {
                 public void onClick(DialogInterface dialog, int which) {
                     String searchText = input.getText().toString();
                     List<PhotoDataImpl> SearchResult = photoViewModel.filterPhotosByAuthorName(searchText);
-                    photoViewModel.getAllPhotos().postValue(SearchResult);
+                    photoViewModel.getPhotoCollection().postValue(SearchResult);
                 }
             });
             builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

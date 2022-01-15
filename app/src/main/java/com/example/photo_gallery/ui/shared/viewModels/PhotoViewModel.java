@@ -20,23 +20,23 @@ public class PhotoViewModel extends ViewModel {
 
     private PhotoRepository photoRepository;
 
-    private MutableLiveData<List<PhotoDataImpl>> allPhotos;
+    private MutableLiveData<List<PhotoDataImpl>> photoCollection;
 
     @Inject
     public PhotoViewModel(PhotoRepository photoRepository) {
         this.photoRepository = photoRepository;
-        this.allPhotos = new MutableLiveData<>();
+        this.photoCollection = new MutableLiveData<>();
     }
 
     public void fetchAllPhotos() {
         this.photoRepository.getAllPhotos()
                 .subscribeOn(Schedulers.io())
-                .subscribe(photos -> { this.allPhotos.postValue(photos); },
+                .subscribe(photos -> { this.photoCollection.postValue(photos); },
                         throwable -> {throwable.printStackTrace();});
     }
 
-    public MutableLiveData<List<PhotoDataImpl>> getAllPhotos () {
-        return this.allPhotos;
+    public MutableLiveData<List<PhotoDataImpl>> getPhotoCollection() {
+        return this.photoCollection;
     }
 
     public void fetchFavorites() {
@@ -46,7 +46,7 @@ public class PhotoViewModel extends ViewModel {
                 .flatMapSingle(idHolder -> this.photoRepository.getPhotoById(idHolder.getExternalId()))
                 .toList()
                 .subscribe(allFavorites -> {
-                    allPhotos.postValue(allFavorites);
+                    photoCollection.postValue(allFavorites);
                     }, throwable -> {throwable.printStackTrace();});
 
     }
@@ -63,7 +63,7 @@ public class PhotoViewModel extends ViewModel {
     }
 
     public List<PhotoDataImpl> filterPhotosByAuthorName(String searchInput) {
-        List<PhotoDataImpl> allPhotos = this.getAllPhotos().getValue();
+        List<PhotoDataImpl> allPhotos = this.getPhotoCollection().getValue();
         List<PhotoDataImpl> searchResult = null;
 
         if (allPhotos != null) {
