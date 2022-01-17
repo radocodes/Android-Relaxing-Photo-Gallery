@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">photo_gallery</string>
+
+    <!-- fragment_dashboard -->
     <string name="title_dashboard">Dashboard</string>
+    <string name="button_ascending_order">A-Z</string>
+    <string name="button_descending_order">Z-A</string>
+    <string name="button_search">Search</string>
+
+    <!-- fragment_favorites -->
     <string name="title_favorites">Favorites</string>
+
+    <!-- fragment_photo_details -->
     <string name="title_photo_details">Photo details</string>
     <string name="photo_details_author_name_ticket">Author:</string>
     <string name="photo_details_original_width_ticket">Original width:</string>
