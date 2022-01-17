@@ -27,4 +27,18 @@
     <dimen name="photo_image_margin_start">16dp</dimen>
     <dimen name="photo_image_margin_end">16dp</dimen>
 
+    <!-- fragment_photo_details -->
+    <dimen name="text_photo_details_margin_start">8dp</dimen>
+    <dimen name="text_photo_details_margin_end">8dp</dimen>
+    <dimen name="text_photo_details_text_size">20sp</dimen>
+    <dimen name="details_photo_image_width">380dp</dimen>
+    <dimen name="details_photo_image_margin_start">16dp</dimen>
+    <dimen name="details_photo_image_margin_end">16dp</dimen>
+    <dimen name="bookmark_button_width">40dp</dimen>
+    <dimen name="bookmark_button_height">25dp</dimen>
+    <dimen name="bookmark_button_margin_bottom">0dp</dimen>
+    <dimen name="text_bookmark_margin_start">8dp</dimen>
+    <dimen name="text_bookmark_margin_end">8dp</dimen>
+    <dimen name="text_bookmark_margin_bottom">55dp</dimen>
+    <dimen name="text_bookmark_text_size">10sp</dimen>
 </resources>
