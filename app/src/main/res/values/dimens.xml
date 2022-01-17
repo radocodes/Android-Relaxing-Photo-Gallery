@@ -14,4 +14,17 @@
     <dimen name="photos_list_padding_bottom">120dp</dimen>
     <dimen name="photos_list_text_size">20sp</dimen>
 
+    <!-- photos_recycler_view_row -->
+    <dimen name="author_name_width">381dp</dimen>
+    <dimen name="author_name_height">24dp</dimen>
+    <dimen name="author_name_margin_start">16dp</dimen>
+    <dimen name="author_name_margin_end">16dp</dimen>
+    <dimen name="author_name_margin_top">16dp</dimen>
+    <dimen name="author_name_margin_bottom">0dp</dimen>
+    <dimen name="author_name_text_size">20sp</dimen>
+    <dimen name="photo_image_width">164dp</dimen>
+    <dimen name="photo_image_height">164dp</dimen>
+    <dimen name="photo_image_margin_start">16dp</dimen>
+    <dimen name="photo_image_margin_end">16dp</dimen>
+
 </resources>
