@@ -74,8 +74,12 @@ public class DashboardFragmentBase extends Fragment {
         binding = null;
     }
 
+    /**
+     * You can add different logic in this method according your needs,
+     * when you override this method through class inheritance
+     */
     protected void loadPhotoCollection() {
-//        photoViewModel.fetchAllPhotos();
+        
     }
 
     private void addButtonsFunctionality() {
