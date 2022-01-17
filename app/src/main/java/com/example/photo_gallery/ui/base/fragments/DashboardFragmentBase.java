@@ -75,11 +75,11 @@ public class DashboardFragmentBase extends Fragment {
     }
 
     /**
-     * You can add different logic in this method according your needs,
+     * You can write code to load different photo collection in this method according your needs,
      * when you override this method through class inheritance
      */
     protected void loadPhotoCollection() {
-        
+
     }
 
     private void addButtonsFunctionality() {
