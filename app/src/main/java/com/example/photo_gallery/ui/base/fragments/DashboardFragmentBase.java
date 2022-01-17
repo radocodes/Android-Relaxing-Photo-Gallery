@@ -145,14 +145,14 @@ public class DashboardFragmentBase extends Fragment {
         @Override
         public void onClick(View view) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Search photo by author name:");
+            builder.setTitle(getString(R.string.search_alert_dialog_title));
 
             // Set up the input
             final EditText input = new EditText(getContext());
             builder.setView(input);
 
             // Set up the buttons
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(getString(R.string.search_alert_dialog_positive_button), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String searchText = input.getText().toString();
@@ -160,7 +160,7 @@ public class DashboardFragmentBase extends Fragment {
                     photoViewModel.getPhotoCollection().postValue(SearchResult);
                 }
             });
-            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton(getString(R.string.search_alert_dialog_negative_button), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
