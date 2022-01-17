@@ -109,11 +109,11 @@ public class PhotoDetailsFragment extends Fragment {
         @Override
         public void onChanged(Boolean isBookmarked) {
             if (isBookmarked) {
-                textViewBookmark.setText("Remove from favorites");
+                textViewBookmark.setText(getString(R.string.text_bookmark_remove_action));
                 bookmarkImageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_button_fill));
             }
             else {
-                textViewBookmark.setText("Add to favorites");
+                textViewBookmark.setText(getString(R.string.text_bookmark_add_action));
                 bookmarkImageButton.setImageDrawable(getResources().getDrawable(R.drawable.ic_bookmark_button_stroke));
             }
         }

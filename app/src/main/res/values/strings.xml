@@ -21,4 +21,6 @@
     <string name="photo_details_original_width_ticket">Original width:</string>
     <string name="photo_details_original_height_ticket">Original height:</string>
     <string name="photo_details_photo_image_url_ticket">Origin URL:</string>
+    <string name="text_bookmark_remove_action">Remove from favorites</string>
+    <string name="text_bookmark_add_action">Add to favorites</string>
 </resources>
