@@ -33,3 +33,11 @@ Expect some more improvements in future!
 - Repository pattern
 - Observer pattern
 
+
+#### App screenshots:
+
+Dashboard or Favorites screen and Photo details screen:
+
+<img src="/documentation_resources/app_screenshots/dashboard_favorites_screen.png" width="300" height="580"/> <img src="/documentation_resources/app_screenshots/photo_details_screen.png" width="300" height="580"/>
+
+
